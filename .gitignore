@@ -11,3 +11,4 @@ src/visualization/logs/
 src/visualization/test.py
 notebook/logs/
 notebook/new_test.ipynb
+results/
