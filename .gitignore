@@ -3,7 +3,6 @@ logs/
 data/
 src/data_preprocessing/logs/
 src/__pycache__/
-new test.ipynb
 src/data_preprocessing/test_data_transformation.py
 src/data_preprocessing/__pycache__/
 src/test.py
@@ -11,3 +10,4 @@ src/models/logs/
 src/visualization/logs/
 src/visualization/test.py
 notebook/logs/
+notebook/new_test.ipynb
