@@ -249,7 +249,7 @@ class DataTransformer:
             training_data = []
             # Define the directory path where the videos are stored based on the exercise name and criteria
             dir_path = os.path.normpath(os.path.join(os.path.join(
-                os.path.dirname(os.path.abspath(__file__)), "..", "..", "data/external/")))
+                os.path.dirname(os.path.abspath(__file__)), "..", "..", "data/interim/")))
             dir_path += "/"+self.exercise_name+"/"+criteria
             # Loop through each label in the directory
             for label in os.listdir(dir_path):
