@@ -237,7 +237,7 @@ class CyclesDivider(DataTransformer):
             logging.error("Error: "+str(e))
             raise CustomException(e, sys)
 
-    def save_cycle_frames_as_video(self, cycle_frames, output_path, fps=30):
+    def save_cycle_frames_as_video(self, cycle_frames, output_path, fps=24):
         """
         Save a list of frames as a video file.
         input:
@@ -267,7 +267,7 @@ class CyclesDivider(DataTransformer):
             logging.error("Error: "+str(e))
             raise CustomException(e, sys)
 
-    def save_cycles_as_videos(self, cycles: list, video_name: str):
+    def save_cycles_as_videos(self, cycles: list, video_name: str, output_dir):
         """
         This function will save the cycles as videos in the output directory.
         input:
@@ -277,8 +277,6 @@ class CyclesDivider(DataTransformer):
             None
         """
         try:
-            output_dir = os.path.normpath(os.path.join(
-                os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "results", "cycles_divider")))
             for i, cycle in enumerate(cycles):
                 output_path = os.path.join(
                     output_dir, video_name+"_cycle"+str(i+1)+".mp4")
@@ -307,19 +305,3 @@ class CyclesDivider(DataTransformer):
             logging.error("Error: "+str(e))
             raise CustomException(e, sys)
 
-
-if __name__ == "__main__":
-    # Parse command-line arguments
-    parser = argparse.ArgumentParser(
-        description="Divide the video into cycles")
-    parser.add_argument("exercise_name", type=str, help="Exercise name")
-    parser.add_argument("--path", type=str, help="Path to the video file")
-    args = parser.parse_args()
-
-    # Create CyclesDivider object with command-line arguments
-    divider = CyclesDivider(args.exercise_name, args.evaluation_type)
-    # Get cycles from the video
-    cycles = divider.get_cycles(args.path)
-    # Save the cycles as videos
-    video_name = divider.get_video_name_without_extension(args.path)
-    divider.save_cycles_as_videos(cycles, video_name)
