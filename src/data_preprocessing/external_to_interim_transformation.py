@@ -9,14 +9,13 @@ sys.path.append(REPO_DIR_PATH)
 from src.data_preprocessing.cycles_divider import CyclesDivider
 from src.logger import logging
 from src.exception import CustomException
-from src.utils import load_config
 
 
 class ExternalToInterimTransformer(CyclesDivider):
     def __init__(self):
         logging.info("Initializing ExternalToInterimTransformer")
         # Load the available_exercises from configuration file
-        self.config = load_config()
+        super().__init__("bicep", "angles")
         self.available_exercises = self.config["available_exercises"]
 
     def transform(self):
