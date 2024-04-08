@@ -97,6 +97,11 @@ class VisualizeCyclesDivider(CyclesDivider):
     def visualize(self):
         """
         This function will visualize the cycles divider.
+        input:
+            None
+        output:
+            None
+            Cycle videos will be saved in the results/cycles_divider directory
         """
         try:
             # Get the cycles from the video
@@ -107,7 +112,14 @@ class VisualizeCyclesDivider(CyclesDivider):
                 video_name = "webcam_"+current_time
             else:
                 video_name = self.get_video_name_without_extension(self.video_source)
-            self.save_cycles_as_videos(cycles, video_name)
+            # Define the output directory
+            output_dir = os.path.normpath(os.path.join(
+                os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "results", "cycles_divider")))
+            # Check if the directory already exists
+            if not os.path.exists(output_dir):
+                # Create the directory
+                os.makedirs(output_dir)
+            self.save_cycles_as_videos(cycles, video_name, output_dir)
         except Exception as e:
             logging.error("Error: "+str(e))
             raise CustomException(e, sys)
