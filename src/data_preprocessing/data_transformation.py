@@ -292,9 +292,9 @@ class DataTransformer:
             None
         """
         try:
-            # Loop through each criteria in the external data directory
+            # Loop through each criteria in the interim data directory
             dir_path = os.path.normpath(os.path.join(os.path.join(
-                os.path.dirname(os.path.abspath(__file__)), "..", "..", "data/external")))
+                os.path.dirname(os.path.abspath(__file__)), "..", "..", "data/interim")))
             dir_path += "/"
             for criteria in os.listdir(dir_path+self.exercise_name):
                 # Log the start of data transformation for the current criteria

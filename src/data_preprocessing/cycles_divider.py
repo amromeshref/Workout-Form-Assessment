@@ -6,7 +6,6 @@ REPO_DIR_PATH = os.path.normpath(os.path.join(
 sys.path.append(REPO_DIR_PATH)
 
 import numpy as np
-import argparse
 from src.logger import logging
 from src.exception import CustomException
 from src.data_preprocessing.data_transformation import DataTransformer
