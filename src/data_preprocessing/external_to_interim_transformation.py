@@ -9,13 +9,13 @@ sys.path.append(REPO_DIR_PATH)
 from src.data_preprocessing.cycles_divider import CyclesDivider
 from src.logger import logging
 from src.exception import CustomException
+from src.utils import load_config
 
-
-class ExternalToInterimTransformer(CyclesDivider):
+class ExternalToInterimTransformer:
     def __init__(self):
         logging.info("Initializing ExternalToInterimTransformer")
         # Load the available_exercises from configuration file
-        super().__init__("bicep", "angles")
+        self.config = load_config()
         self.available_exercises = self.config["available_exercises"]
 
     def transform(self):
@@ -43,6 +43,9 @@ class ExternalToInterimTransformer(CyclesDivider):
                 # Define the directory for the exercise data
                 exercise_data_dir = external_data_dir + exercise + "/"
 
+                # Create a CyclesDivider object
+                divider = CyclesDivider(exercise, "angles")
+
                 # Iterate over each criteria
                 for criteria in criterias:
                     # Define the directory for the criteria data
@@ -60,17 +63,17 @@ class ExternalToInterimTransformer(CyclesDivider):
                                 "Started processing the video: " + video_path)
 
                             # Get the cycles from the video
-                            cycles = self.get_cycles(video_path)
+                            cycles = divider.get_cycles(video_path)
 
                             # Get the video name without extension
-                            video_name = self.get_video_name_without_extension(
+                            video_name = divider.get_video_name_without_extension(
                                 video_path)
 
                             # Define the output directory for saving cycles
                             output_dir = interim_data_dir + exercise + "/" + criteria + "/" + label
 
                             # Save the cycles as videos in the interim directory
-                            self.save_cycles_as_videos(
+                            divider.save_cycles_as_videos(
                                 cycles, video_name, output_dir)
 
                             # Log the completion of video processing

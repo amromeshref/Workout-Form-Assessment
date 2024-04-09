@@ -79,6 +79,14 @@ class CyclesDivider(DataTransformer):
         except Exception as e:
             logging.error("Error: " + str(e))
             raise CustomException(e, sys)
+    
+    def check_visibility(self, landmarks, points):
+        visibility1 = landmarks[points[0]].visibility
+        visibility2 = landmarks[points[1]].visibility
+        visibility3 = landmarks[points[2]].visibility
+        if visibility1 > 0.8 and visibility2 > 0.8 and visibility3 > 0.8:
+            return True
+        return False
 
     def get_video_frames_and_angles(self, video_path: str):
         """
@@ -95,6 +103,9 @@ class CyclesDivider(DataTransformer):
             frames = []  # List to store video frames
             angles = []  # List to store angles
 
+            if not cap.isOpened():
+                logging.error("Error: Cannot open video file")
+                raise CustomException("Cannot open video file", sys)
             # Loop through each frame of the video
             while cap.isOpened():
                 ret, frame = cap.read()
@@ -118,12 +129,20 @@ class CyclesDivider(DataTransformer):
                     landmarks = results.pose_landmarks.landmark
 
                     # Get coordinates of landmarks
-                    first = [landmarks[self.divider_landmarks[0]].x,
-                             landmarks[self.divider_landmarks[0]].y]
-                    mid = [landmarks[self.divider_landmarks[1]].x,
-                           landmarks[self.divider_landmarks[1]].y]
-                    end = [landmarks[self.divider_landmarks[2]].x,
-                           landmarks[self.divider_landmarks[2]].y]
+                    if self.check_visibility(landmarks, self.divider_landmarks["left"]):
+                        first = [landmarks[self.divider_landmarks["left"][0]].x,
+                                landmarks[self.divider_landmarks["left"][0]].y]
+                        mid = [landmarks[self.divider_landmarks["left"][1]].x,
+                            landmarks[self.divider_landmarks["left"][1]].y]
+                        end = [landmarks[self.divider_landmarks["left"][2]].x,
+                            landmarks[self.divider_landmarks["left"][2]].y]
+                    else:
+                        first = [landmarks[self.divider_landmarks["right"][0]].x,
+                                landmarks[self.divider_landmarks["right"][0]].y]
+                        mid = [landmarks[self.divider_landmarks["right"][1]].x,
+                            landmarks[self.divider_landmarks["right"][1]].y]
+                        end = [landmarks[self.divider_landmarks["right"][2]].x,
+                            landmarks[self.divider_landmarks["right"][2]].y]
 
                     # Calculate angle and append to the angles list
                     angle = self.calculate_angle(first, mid, end)
@@ -154,7 +173,10 @@ class CyclesDivider(DataTransformer):
             denoised_angles(np.array): Denoised angles
         """
         try:
-            window_size = 11
+            if self.exercise_name == "bicep":
+                window_size = 41
+            elif self.exercise_name == "lateral_raise":
+                window_size = 21
             denoised_angles = medfilt(angles, kernel_size=window_size)
             return denoised_angles
         except Exception as e:

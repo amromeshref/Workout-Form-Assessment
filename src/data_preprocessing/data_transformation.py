@@ -251,6 +251,18 @@ class DataTransformer:
             dir_path = os.path.normpath(os.path.join(os.path.join(
                 os.path.dirname(os.path.abspath(__file__)), "..", "..", "data/interim/")))
             dir_path += "/"+self.exercise_name+"/"+criteria
+
+            # Initialize the data size
+            data_size = 0
+            for label in os.listdir(dir_path):
+                data_size += len(os.listdir(dir_path+"/"+label))    
+            
+            # Initialize the counter
+            cnt = 0
+            # Initialize the conditions for logging
+            cond_25 = True
+            cond_50 = True
+            cond_75 = True
             # Loop through each label in the directory
             for label in os.listdir(dir_path):
                 # Loop through each video file in the label directory
@@ -274,6 +286,16 @@ class DataTransformer:
                             "Evaluation Type Not Supported or Not Found")
                         raise CustomException(
                             "Evaluation Type Not Supported or Not Found", sys)
+                    if cnt/data_size >= 0.25 and cond_25:
+                        logging.info("Data Transformation Progress: 25%")
+                        cond_25 = False
+                    if cnt/data_size >= 0.5 and cond_50:
+                        logging.info("Data Transformation Progress: 50%")
+                        cond_50 = False
+                    if cnt/data_size >= 0.75 and cond_75:
+                        logging.info("Data Transformation Progress: 75%")
+                        cond_75 = False
+                    cnt += 1
             # Convert the training data list to a numpy array
             training_data = np.array(training_data, dtype=object)
             # Return the training data
