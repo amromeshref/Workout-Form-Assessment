@@ -1,6 +1,7 @@
 logs/
 .ipynb_checkpoints/
-data/
+data/external
+data/interim
 src/data_preprocessing/logs/
 src/__pycache__/
 src/data_preprocessing/test_data_transformation.py
