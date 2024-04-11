@@ -41,6 +41,9 @@ class VisualizeCyclesDivider(CyclesDivider):
             frames = []  # List to store video frames
             angles = []  # List to store angles
 
+            if not cap.isOpened():
+                logging.error("Error: Cannot open video file")
+                raise CustomException("Cannot open video file", sys)
             # Loop through each frame of the video
             while cap.isOpened():
                 ret, frame = cap.read()
@@ -64,12 +67,20 @@ class VisualizeCyclesDivider(CyclesDivider):
                     landmarks = results.pose_landmarks.landmark
 
                     # Get coordinates of landmarks
-                    first = [landmarks[self.divider_landmarks[0]].x,
-                             landmarks[self.divider_landmarks[0]].y]
-                    mid = [landmarks[self.divider_landmarks[1]].x,
-                           landmarks[self.divider_landmarks[1]].y]
-                    end = [landmarks[self.divider_landmarks[2]].x,
-                           landmarks[self.divider_landmarks[2]].y]
+                    if self.check_visibility(landmarks, self.divider_landmarks["left"]):
+                        first = [landmarks[self.divider_landmarks["left"][0]].x,
+                                landmarks[self.divider_landmarks["left"][0]].y]
+                        mid = [landmarks[self.divider_landmarks["left"][1]].x,
+                            landmarks[self.divider_landmarks["left"][1]].y]
+                        end = [landmarks[self.divider_landmarks["left"][2]].x,
+                            landmarks[self.divider_landmarks["left"][2]].y]
+                    else:
+                        first = [landmarks[self.divider_landmarks["right"][0]].x,
+                                landmarks[self.divider_landmarks["right"][0]].y]
+                        mid = [landmarks[self.divider_landmarks["right"][1]].x,
+                            landmarks[self.divider_landmarks["right"][1]].y]
+                        end = [landmarks[self.divider_landmarks["right"][2]].x,
+                            landmarks[self.divider_landmarks["right"][2]].y]
 
                     # Calculate angle and append to the angles list
                     angle = self.calculate_angle(first, mid, end)
@@ -114,7 +125,7 @@ class VisualizeCyclesDivider(CyclesDivider):
                 video_name = self.get_video_name_without_extension(self.video_source)
             # Define the output directory
             output_dir = os.path.normpath(os.path.join(
-                os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "results", "cycles_divider")))
+                os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "results", "cycles_divider", video_name)))
             # Check if the directory already exists
             if not os.path.exists(output_dir):
                 # Create the directory
