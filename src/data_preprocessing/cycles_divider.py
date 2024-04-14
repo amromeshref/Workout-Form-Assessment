@@ -258,7 +258,7 @@ class CyclesDivider(DataTransformer):
             logging.error("Error: "+str(e))
             raise CustomException(e, sys)
 
-    def save_cycle_frames_as_video(self, cycle_frames, output_path, fps=24):
+    def save_cycle_frames_as_video(self, cycle_frames, output_path, fps=12):
         """
         Save a list of frames as a video file.
         input:
