@@ -135,7 +135,7 @@ class ModelTrainer:
         logging.info("Training Model for Criteria 1 Started")
         # Train the model
         model_criteria1.fit(X_train_criteria1,
-                            y_train_criteria1, epochs=1, batch_size=32)
+                            y_train_criteria1, epochs=50, batch_size=32)
         logging.info("Training Model for Criteria 1 Completed")
         # Save the model
         saved_path = os.path.normpath(os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "models", "other",
@@ -154,7 +154,7 @@ class ModelTrainer:
         logging.info("Training Model for Criteria 2 Started")
         # Train the model
         model_criteria2.fit(X_train_criteria2,
-                            y_train_criteria2, epochs=1, batch_size=32)
+                            y_train_criteria2, epochs=50, batch_size=32)
         logging.info("Training Model for Criteria 2 Completed")
         # Save the model
         saved_path = os.path.normpath(os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "models", "other",
@@ -173,7 +173,7 @@ class ModelTrainer:
         logging.info("Training Model for Criteria 3 Started")
         # Train the model
         model_criteria3.fit(X_train_criteria3,
-                            y_train_criteria3, epochs=1, batch_size=32)
+                            y_train_criteria3, epochs=50, batch_size=32)
         logging.info("Training Model for Criteria 3 Completed")
         # Save the model
         saved_path = os.path.normpath(os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "models", "other",
