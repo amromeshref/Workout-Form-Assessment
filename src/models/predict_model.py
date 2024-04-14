@@ -48,7 +48,7 @@ class ModelPredictor:
             # Apply sigmoid activation function
             predictions = sigmoid(predictions)
             logging.info("Prediction Completed for Criteria 1")
-            return predictions[0][0].numpy()
+            return float(predictions[0][0].numpy())
         except Exception as e:
             logging.error("Prediction Failed for Criteria 1 due to: "+str(e))
             raise CustomException("Prediction Failed for Criteria 1")
@@ -71,7 +71,7 @@ class ModelPredictor:
             # Apply sigmoid activation function
             predictions = sigmoid(predictions)
             logging.info("Prediction Completed for Criteria 2")
-            return predictions[0][0].numpy()
+            return float(predictions[0][0].numpy())
         except Exception as e:
             logging.error("Prediction Failed for Criteria 2 due to: "+str(e))
             raise CustomException("Prediction Failed for Criteria 2")
@@ -94,7 +94,7 @@ class ModelPredictor:
             # Apply sigmoid activation function
             predictions = sigmoid(predictions)
             logging.info("Prediction Completed for Criteria 3")
-            return predictions[0][0].numpy()
+            return float(predictions[0][0].numpy())
         except Exception as e:
             logging.error("Prediction Failed for Criteria 3 due to: "+str(e))
             raise CustomException("Prediction Failed for Criteria 3")
