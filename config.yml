@@ -4,6 +4,7 @@
 "lateral_raise_poses_landmarks": [11,13,15,12,14,16,23,24,25,26,27,28]
 "lateral_raise_angles_landmarks" : [[11,13,15],[12,14,16],[13,11,23],[14,12,24],[15,11,23],[16,12,24],[11,23,25],[12,24,26]]
 "available_evaluation_types" : ["poses", "angles"]
+"best_evaluation_type" : "angles"
 "available_exercises" : ["bicep", "lateral_raise"]
 "bicep_divider_landmarks" : {"left": [11,13,15], "right": [12,14,16]}
 "lateral_raise_divider_landmarks" : {"left": [23,11,13], "right": [24,12,14]}
