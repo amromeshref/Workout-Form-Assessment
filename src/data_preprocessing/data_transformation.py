@@ -388,6 +388,9 @@ class DataTransformer:
                     seq = []
                     # Iterate over each frame in the cycle
                     for frame in cycle:
+                        # Break loop if maximum frames per cycle is reached
+                        if (len(seq) == self.max_frames_number_per_cycle):
+                            break
                         # Get angles for the current frame
                         frame_angles = self.get_frame_angles(frame)
                         # If no angles are detected, continue to the next frame
