@@ -372,6 +372,9 @@ class DataTransformer:
                             continue
                         # Append the poses for the current frame to the seq list
                         seq.append(frame_poses)
+                    # If the video is less than the required frames number, fill the rest with zeros
+                    while (len(seq) < self.max_frames_number_per_cycle):
+                        seq.append([0]*len(self.poses_landmarks)*2)
                     # Convert the seq list to a numpy array and append it to the seq_data list
                     seq_data.append(np.array(seq))
                 # Return the sequential data
@@ -392,6 +395,9 @@ class DataTransformer:
                             continue
                         # Append the angles for the current frame to the seq list
                         seq.append(frame_angles)
+                    # If the video is less than the required frames number, fill the rest with zeros
+                    while (len(seq) < self.max_frames_number_per_cycle):
+                        seq.append([0]*len(self.angles_landmarks))
                     # Convert the seq list to a numpy array and append it to the seq_data list
                     seq_data.append(np.array(seq))
                 # Return the sequential data

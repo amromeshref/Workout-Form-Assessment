@@ -1,5 +1,3 @@
-import argparse
-from datetime import datetime
 import sys
 import os
 # Add the repository directory path to the Python path
@@ -10,8 +8,10 @@ sys.path.append(REPO_DIR_PATH)
 from src.data_preprocessing.cycles_divider import CyclesDivider
 from src.logger import logging
 from src.exception import CustomException
+from datetime import datetime
+import argparse
 import cv2
-
+e
 
 class VisualizeCyclesDivider(CyclesDivider):
     """
