@@ -11,7 +11,7 @@ from src.exception import CustomException
 from datetime import datetime
 import argparse
 import cv2
-e
+
 
 class VisualizeCyclesDivider(CyclesDivider):
     """
