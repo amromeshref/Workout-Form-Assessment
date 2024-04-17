@@ -12,7 +12,7 @@ from src.data_preprocessing.data_transformation import DataTransformer
 import cv2
 from src.utils import load_config
 from scipy.signal import medfilt
-from scipy.signal import find_peaks
+from scipy.signal import find_peaks, butter, filtfilt
 
 
 class CyclesDivider(DataTransformer):
@@ -174,7 +174,7 @@ class CyclesDivider(DataTransformer):
         """
         try:
             if self.exercise_name == "bicep":
-                window_size = 41
+                window_size = 11
             elif self.exercise_name == "lateral_raise":
                 window_size = 21
             denoised_angles = medfilt(angles, kernel_size=window_size)
@@ -182,6 +182,32 @@ class CyclesDivider(DataTransformer):
         except Exception as e:
             logging.error("Error: "+str(e))
             raise CustomException(e, sys)
+        
+    def butter_lowpass_filter(self, angles, cutoff_freq, fs, order):
+        """
+        Apply a low-pass Butterworth filter to the input data.
+
+        Parameters:
+            data (array-like): Input data to be smoothed.
+            cutoff_freq (float): Cutoff frequency of the filter (in Hz).
+            fs (float): Sampling frequency of the data (in Hz).
+            order (int): Order of the filter.
+
+        Returns:
+            ndarray: Smoothed values.
+        """
+        angles = np.array(angles)
+        nyquist_freq = 0.5 * fs
+        normal_cutoff = cutoff_freq / nyquist_freq
+        b, a = butter(order, normal_cutoff, btype='low', analog=False)
+        filtered_data = filtfilt(b, a, angles)
+        return filtered_data 
+    
+    def remove_noise(self, angles):
+        denoised_angles =  self.butter_lowpass_filter(angles, cutoff_freq=5.0, fs=50.0, order=5)
+        denoised_angles = self.median_filter(denoised_angles)
+        return denoised_angles
+
 
     def get_peaks(self, angles: list):
         """
@@ -226,8 +252,8 @@ class CyclesDivider(DataTransformer):
             frames, angles = self.get_video_frames_and_angles(video_path)
             logging.info("Frames and angles extracted successfully from the video")
 
-            # Apply median filter to noisy angles
-            denoised_angles = self.median_filter(angles)
+            # Remove noise from the angles
+            denoised_angles = self.remove_noise(angles)
 
             # Get peaks based on exercise type
             # If exercise is bicep, get peaks
@@ -258,7 +284,7 @@ class CyclesDivider(DataTransformer):
             logging.error("Error: "+str(e))
             raise CustomException(e, sys)
 
-    def save_cycle_frames_as_video(self, cycle_frames, output_path, fps=12):
+    def save_cycle_frames_as_video(self, cycle_frames, output_path, fps=20):
         """
         Save a list of frames as a video file.
         input:

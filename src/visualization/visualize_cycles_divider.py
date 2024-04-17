@@ -45,6 +45,8 @@ class VisualizeCyclesDivider(CyclesDivider):
                 logging.error("Error: Cannot open video file")
                 raise CustomException("Cannot open video file", sys)
             # Loop through each frame of the video
+            cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+            cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1280)
             while cap.isOpened():
                 ret, frame = cap.read()
 
@@ -90,6 +92,7 @@ class VisualizeCyclesDivider(CyclesDivider):
                     raise CustomException(e, sys)
                 
                 # Display the frame
+                frame = cv2.flip(frame, 1)
                 cv2.imshow("Cycles Divider", frame)  
 
                 # Exit loop if 'q' key is pressed
