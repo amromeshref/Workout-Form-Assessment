@@ -8,6 +8,7 @@ Welcome to Workout Form Assessment! This project aims to provide a tool for asse
 
 ## Features
 
+- **TensorFlow Implementation**: Utilizes TensorFlow for building and training the model to assess workout forms based on uploaded videos.
 - **GRU Analysis**: Utilizes GRU (Gated Recurrent Unit) model for assessing workout forms based on uploaded videos.
 - **User-Friendly Interface**: Offers an intuitive interface for easy interaction and interpretation of assessment results.
 - **Multi-Exercise Support**: Supports assessment for various exercises, from squats and deadlifts to push-ups and planks.
@@ -58,4 +59,4 @@ Special thanks to the contributors who helped make this project possible.
 
 ## Contact
 
-For any inquiries or feedback, please contact [author_name](mailto:author_email).
+For any inquiries or feedback, please contact [Amro Meshref](mailto:amr.khamees@ejust.edu.eg).
