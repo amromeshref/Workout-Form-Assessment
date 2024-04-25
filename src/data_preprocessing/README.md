@@ -16,8 +16,10 @@ The scripts contained within this directory cover a range of preprocessing tasks
 - It contains the `DataTransformer` class, which transforms video data into the required format for model training.
   It includes methods for extracting poses and angles from video frames, as well as preparing training data.
 - To run the script:
-
-  `python data_transformation.py <exercise_name> <evaluation_type>`
+  
+  ```
+  python data_transformation.py <exercise_name> <evaluation_type>
+  ```
   
   - `<exercise_name>` : Name of the exercise: `bicep` or `lateral_raise`.
   - `<evaluation_type>` :Evaluation type used for representing cycles as sequential data: `poses` or `angles`.
@@ -27,16 +29,20 @@ The scripts contained within this directory cover a range of preprocessing tasks
 - It transforms external data into interim data. The transformation primarily involves
   dividing the videos into cycles, where each cycle represents a repetition of the exercise movement.
 - To run the script:
-
-  `python external_to_interim_transformation.py`
+  
+  ```
+  python external_to_interim_transformation.py
+  ```
   - Videos in `data/external` will be divided into cycles and saved at `data/interim`.
 
 ### 4. `interim_to_processed_transformation.py`
 - `It transforms interim data into processed data. It performs the crucial
   task of converting the cycles of the exercises present in the interim data into sequential data, which is suitable for training the models.
 - To run the script:
-
-  `python interim_to_processed_transformation.py`
+  
+  ```
+  python interim_to_processed_transformation.py
+  ```
   - Cycles in `data/interim` will be converted into sequential data (both poses and angles) and saved at `data/processed`.
 
 
