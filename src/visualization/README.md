@@ -19,7 +19,7 @@ segment the video into distinct exercise cycles.
   python visualize_cycles_divider.py <exercise_name> video --path <video_path>
   ```
   
-  - `exercise_name`: Name of the exercise: `bicep` or `lateral_raise`.
+  - `<exercise_name>`: Name of the exercise: `bicep` or `lateral_raise`.
   - `<video_path>`: Path to the video file.
 - If you prefer to use a live webcam feed as the input source:
   
@@ -27,7 +27,7 @@ segment the video into distinct exercise cycles.
   python visualize_cycles_divider.py <exercise_name> webcam
   ```
   
-  - `exercise_name`: Name of the exercise: `bicep` or `lateral_raise`.
+  - `<exercise_name>`: Name of the exercise: `bicep` or `lateral_raise`.
 - The cycles after running this script are saved at `results/cycles_divider`.
 
 
@@ -43,16 +43,16 @@ feedback on each cycle of the exercise.
   python visualize_feedback.py <exercise_name> <evaluation_type> video --path <video_path>
   ```
   
-  - `exercise_name`: Name of the exercise: `bicep` or `lateral_raise`.
-  - `evaluation_type`: Type of evaluation criteria: `poses` or `angles`.
+  - `<exercise_name>`: Name of the exercise: `bicep` or `lateral_raise`.
+  - `<evaluation_type>`: Type of evaluation criteria: `poses` or `angles`.
   - `<video_path>`: Path to the video file.
 - If you prefer to use a live webcam feed as the input source:
   
   ```
   python visualize_feedback.py <exercise_name> <evaluation_type> webcam
   ```
-  - `exercise_name`: Name of the exercise: `bicep` or `lateral_raise`.
-  - `evaluation_type`: Type of evaluation criteria: `poses` or `angles`.
+  - `<exercise_name>`: Name of the exercise: `bicep` or `lateral_raise`.
+  - `<evaluation_type>`: Type of evaluation criteria: `poses` or `angles`.
 - The results after running this script is saved at `results/feedback`.
 
 
