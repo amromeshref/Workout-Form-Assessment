@@ -47,3 +47,6 @@ noise while preserving the essential features of the angle graph, leading to mor
 To divide cycles, the module observes the change in angles over consecutive frames. It identifies periods of increasing and decreasing angles, 
 signifying the completion of one cycle. These periods correspond to the peaks and troughs of the sine wave-like angle graph. By detecting these 
 changes, the module segments the video data into individual cycles, enabling finer-grained analysis and modeling of exercise movements.
+
+
+## Add later the representation techniques of the sequential data: poses/angles
