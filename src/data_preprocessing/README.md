@@ -9,18 +9,35 @@ The scripts contained within this directory cover a range of preprocessing tasks
 ### 1. `cycles_divider.py`
 - It provides functions for dividing video data into cycles, which can be used to segment exercises into meaningful
   units for analysis or modeling.
+- To retrieve the results from cycles divider, navigate to the `src/visualization` directory and execute the script
+  `visualize_cycles_divider.py`.
 
 ### 2. `data_transformation.py`
 - It contains the `DataTransformer` class, which transforms video data into the required format for model training.
   It includes methods for extracting poses and angles from video frames, as well as preparing training data.
+- To run the script:
 
+  `python data_transformation.py <exercise_name> <evaluation_type>`
+  
+  - `<exercise_name>` : Name of the exercise: `bicep` or `lateral_raise`.
+  - `<evaluation_type>` :Evaluation type used for representing cycles as sequential data: `poses` or `angles`.
+  - The sequential data for the chosen exercise and chosen evaluation type will be saved at `data/processed/<exercise_name>/<evaluation_type>`
+  
 ### 3. `external_to_interim_transformation.py`
 - It transforms external data into interim data. The transformation primarily involves
   dividing the videos into cycles, where each cycle represents a repetition of the exercise movement.
+- To run the script:
+
+  `python external_to_interim_transformation.py`
+  - Videos in `data/external` will be divided into cycles and saved at `data/interim`.
 
 ### 4. `interim_to_processed_transformation.py`
 - `It transforms interim data into processed data. It performs the crucial
   task of converting the cycles of the exercises present in the interim data into sequential data, which is suitable for training the models.
+- To run the script:
+
+  `python interim_to_processed_transformation.py`
+  - Cycles in `data/interim` will be converted into sequential data (both poses and angles) and saved at `data/processed`.
 
 
 ## How Cycles Divider Works
