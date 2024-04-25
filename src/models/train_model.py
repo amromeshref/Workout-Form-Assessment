@@ -1,3 +1,4 @@
+import argparse
 import sys
 import os
 # Add the repository directory path to the Python path
@@ -139,7 +140,8 @@ class ModelTrainer:
         logging.info("Training Model for Criteria 1 Completed")
         # Save the model
         saved_path = os.path.normpath(os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "models", "other",
-                                                                self.exercise_name, self.evaluation_type, current_time+"_"+self.exercise_name+"_criteria1_"+self.evaluation_type+"_model.h5")))
+                                                                self.exercise_name, self.evaluation_type, current_time, current_time+"_"+self.exercise_name+"_criteria1_"+self.evaluation_type+"_model.h5")))
+        os.makedirs(os.path.dirname(saved_path), exist_ok=True)
         model_criteria1.save(saved_path)
         logging.info("Model for Criteria 1 Saved at "+saved_path)
 
@@ -157,8 +159,9 @@ class ModelTrainer:
                             y_train_criteria2, epochs=50, batch_size=32)
         logging.info("Training Model for Criteria 2 Completed")
         # Save the model
-        saved_path = os.path.normpath(os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "models", "other",
-                                                                self.exercise_name, self.evaluation_type, current_time+"_"+self.exercise_name+"_criteria2_"+self.evaluation_type+"_model.h5")))
+        saved_path = os.path.normpath(os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "models", "other", 
+                                                                self.exercise_name, self.evaluation_type, current_time, current_time+"_"+self.exercise_name+"_criteria2_"+self.evaluation_type+"_model.h5")))
+        os.makedirs(os.path.dirname(saved_path), exist_ok=True)
         model_criteria2.save(saved_path)
         logging.info("Model for Criteria 2 Saved at "+saved_path)
 
@@ -177,12 +180,17 @@ class ModelTrainer:
         logging.info("Training Model for Criteria 3 Completed")
         # Save the model
         saved_path = os.path.normpath(os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "models", "other",
-                                                                self.exercise_name, self.evaluation_type, current_time+"_"+self.exercise_name+"_criteria3_"+self.evaluation_type+"_model.h5")))
+                                                                self.exercise_name, self.evaluation_type, current_time, current_time+"_"+self.exercise_name+"_criteria3_"+self.evaluation_type+"_model.h5")))
+        os.makedirs(os.path.dirname(saved_path), exist_ok=True)
         model_criteria3.save(saved_path)
         logging.info("Model for Criteria 3 Saved at "+saved_path)
 
 
 
 if __name__ == "__main__":
-    trainer = ModelTrainer("bicep", "angles")
+    parser = argparse.ArgumentParser(description="Train the model")
+    parser.add_argument("exercise_name", type=str, help="Exercise name")
+    parser.add_argument("evaluation_type", type=str, help="Evaluation type")
+    args = parser.parse_args()
+    trainer = ModelTrainer(args.exercise_name, args.evaluation_type)
     trainer.train()
