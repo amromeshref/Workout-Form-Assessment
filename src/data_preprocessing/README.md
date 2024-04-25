@@ -1,6 +1,6 @@
 # Data Preprocessing
 
-Welcome to the data_preprocessing directory! This directory houses scripts and modules dedicated to the preprocessing of raw exercise data.
+Welcome to the Data Preprocessing directory! This directory houses scripts and modules dedicated to the preprocessing of raw exercise data.
 The scripts contained within this directory cover a range of preprocessing tasks, including transforming external data into interim data, dividing videos into cycles, and preparing training data for machine learning models.
 
 
