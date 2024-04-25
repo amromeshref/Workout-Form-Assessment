@@ -17,9 +17,10 @@ evaluation criteria, as well as to make predictions using pre-trained models.
 ### 2. `train_model.py`
 - It is used for training the models using prepared training data.
 - To run the script:
-
-  `python train_model.py <exercise_name> <evaluation_type>`
-
+  
+  ```
+  python train_model.py <exercise_name> <evaluation_type>
+  ```
   - `<exercise_name>` : Name of the exercise: `bicep` or `lateral_raise`.
   - `<evaluation_type>` :Evaluation type used for representing cycles as sequential data: `poses` or `angles`.
 - The results after the training is saved at `models/other/<exercise_name>/<evaluation_type>/<current_time>`
