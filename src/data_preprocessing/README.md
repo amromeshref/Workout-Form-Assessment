@@ -1,32 +1,25 @@
 # Data Preprocessing
 
-This directory contains scripts and modules related to the preprocessing of data for model training or analysis. 
-Data preprocessing is an essential step in the machine learning pipeline, involving tasks such as data cleaning, transformation, and 
-feature engineering to prepare the data for further analysis or modeling.
+Welcome to the data_preprocessing directory! This directory houses scripts and modules dedicated to the preprocessing of raw exercise data.
+The scripts contained within this directory cover a range of preprocessing tasks, including transforming external data into interim data, dividing videos into cycles, and preparing training data for machine learning models.
 
-## Directory Structure
-
-- `cycles_divider.py`: Module for dividing video data into cycles based on exercise movements.
-- `data_transformation.py`: Module for transforming video data into the required format for model training.
-- `external_to_interim_transformation.py`: Script for transforming external data into interim data.
-- `interim_to_processed_transformation.py`: Script for transforming interim data into processed data.
 
 ## Scripts
 
 ### 1. `cycles_divider.py`
-- `cycles_divider.py` provides functions for dividing video data into cycles, which can be used to segment exercises into meaningful
+- It provides functions for dividing video data into cycles, which can be used to segment exercises into meaningful
   units for analysis or modeling.
 
-### 2. Data Transformation
-- `data_transformation.py` contains the `DataTransformer` class, which transforms video data into the required format for model training.
+### 2. `data_transformation.py`
+- It contains the `DataTransformer` class, which transforms video data into the required format for model training.
   It includes methods for extracting poses and angles from video frames, as well as preparing training data.
 
-### 3. External to Interim Transformation
-- `external_to_interim_transformation.py` is a script that transforms external data into interim data. The transformation primarily involves
+### 3. `external_to_interim_transformation.py`
+- It transforms external data into interim data. The transformation primarily involves
   dividing the videos into cycles, where each cycle represents a repetition of the exercise movement.
 
-### 4. Interim to Processed Transformation
-- `interim_to_processed_transformation.py` is a script that transforms interim data into processed data. It performs the crucial
+### 4. `interim_to_processed_transformation.py`
+- `It transforms interim data into processed data. It performs the crucial
   task of converting the cycles of the exercises present in the interim data into sequential data, which is suitable for training the models.
 
 
