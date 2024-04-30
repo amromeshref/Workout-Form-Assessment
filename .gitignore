@@ -2,6 +2,8 @@ logs/
 .ipynb_checkpoints/
 data/external
 data/interim
+data/old_interim
+data/old_processed
 src/data_preprocessing/logs/
 src/__pycache__/
 src/data_preprocessing/test_data_transformation.py
@@ -16,3 +18,5 @@ notebook/new_test.ipynb
 results/
 src/models/__pycache__/
 src/models/test.py
+notebook/delete_me.ipynb
+notebook/man.jpg
